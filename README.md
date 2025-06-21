@@ -25,13 +25,16 @@ A simple, serverless Express.js API powered by Supabase PostgreSQL and deployed 
 
 ## 📂 Project Structure
 
-```express-supabase-api/
-├── api/
-│ └── index.js # Main Express server and API routes
-├── .env # Local environment variables
-├── vercel.json # Vercel serverless function configuration
-├── package.json
-└── README.md
+```
+express-supabase-api/
+    ├── api/
+    │   └── index.js             ← Express server with all endpoints
+    ├── .env                     ← Environment variables
+    ├── package.json
+    ├── vercel.json              ← Vercel serverless config
+    ├── README.md
+    └── docs.md                  ← Project documentation
+
 ```
 
 
