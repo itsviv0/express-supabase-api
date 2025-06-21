@@ -37,7 +37,6 @@ express-supabase-api/
 
 ```
 
-
 ---
 
 ## 📦 Setup & Installation
@@ -50,11 +49,13 @@ cd express-supabase-api
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Set Up Environment Variables
+
 Create a .env file and add your Supabase project details:
 
 ```env

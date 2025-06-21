@@ -36,3 +36,28 @@ This pattern can be extended to many real-world apps: to-do systems, bug tracker
 | title      | Text                     | ❌ No           | (leave blank)      | ❌ No       |
 | content    | Text                     | ❌ No           | (leave blank)      | ❌ No       |
 | created_at | Timestamp with Time Zone | ❌ No           | now()              | ❌ No       |
+
+# 🧠 Tip: Enable the UUID Extension (if needed)
+
+If you get an error about uuid_generate_v4(), do this:
+
+Go to SQL Editor in Supabase project and run the following query
+
+```sql
+create extension if not exists "uuid-ossp";
+```
+
+# 🛠️ Use SQL Query to create the 'notes' table
+
+Go to SQL Editor in Supabase and run this SQL:
+
+```sql
+create extension if not exists "uuid-ossp";
+
+create table if not exists notes (
+  id uuid primary key default uuid_generate_v4(),
+  title text not null,
+  content text not null,
+  created_at timestamp with time zone default now()
+);
+```
