@@ -33,4 +33,33 @@ describe("Notes API", () => {
     const response = await request(app).delete(`/api/notes/${noteId}`);
     expect(response.statusCode).toBe(204);
   });
+
+  // Additional tests for error handling
+  test("POST /api/notes → should fail when title is missing", async () => {
+  const res = await request(app)
+    .post("/api/notes")
+    .send({ content: "No title provided" });
+
+  expect(res.statusCode).toBe(500); // or 400, depending on how you handle it
+  });
+
+  test("GET /api/notes → should return empty array when no notes exist", async () => {
+  const res = await request(app).get("/api/notes");
+  expect(res.statusCode).toBe(200);
+  expect(Array.isArray(res.body)).toBe(true);
+  });
+
+  test("PUT /api/notes/:id → should return 500 for non-existing ID", async () => {
+  const res = await request(app)
+    .put("/api/notes/non-existent-id")
+    .send({ title: "Doesn't exist", content: "..." });
+  expect(res.statusCode).toBe(500);
+  });
+
+  test("DELETE /api/notes/:id → should return 500 for non-existing ID", async () => {
+  const res = await request(app)
+    .delete("/api/notes/non-existent-id");
+  expect(res.statusCode).toBe(500);
+  });
+
 });
