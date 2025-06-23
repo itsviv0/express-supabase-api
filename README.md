@@ -29,11 +29,15 @@ A simple, serverless Express.js API powered by Supabase PostgreSQL and deployed 
 express-supabase-api/
     ├── api/
     │   └── index.js             ← Express server with all endpoints
+    |   node_modules
+    |   tests
+    |   └── api.test.js          ← Test cases
     ├── .env                     ← Environment variables
+    ├── api_docs.md              ← API documentation
+    ├── docs.md                  ← Project documentation
     ├── package.json
-    ├── vercel.json              ← Vercel serverless config
     ├── README.md
-    └── docs.md                  ← Project documentation
+    └── vercel.json              ← Vercel serverless config
 
 ```
 
@@ -67,5 +71,40 @@ SUPABASE_KEY=your-service-role-key
 
 ```bash
 node api/index.js
+# or
+npm run dev
+
 Visit: http://localhost:3000/api/notes
 ```
+
+### 5. Run tests
+
+```bash
+npm test
+```
+
+Sample Output:
+
+```bash
+> express-supabase-api@1.0.0 test
+> jest
+
+ PASS  tests/api.test.js (6.106 s)
+  Notes API
+    ✓ POST /api/notes → should create a new note (1426 ms)
+    ✓ GET /api/notes → should return list of notes (767 ms)
+    ✓ PUT /api/notes/:id → should update the note (817 ms)
+    ✓ DELETE /api/notes/:id → should delete the note (305 ms)
+    ✓ POST /api/notes → should fail when title is missing (796 ms)
+    ✓ GET /api/notes → should return empty array when no notes exist (330 ms)
+    ✓ PUT /api/notes/:id → should return 500 for non-existing ID (308 ms)
+    ✓ DELETE /api/notes/:id → should return 500 for non-existing ID (308 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        6.241 s
+Ran all test suites.
+```
+
+![alt text](test_results.png)
