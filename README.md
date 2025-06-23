@@ -79,6 +79,8 @@ Visit: http://localhost:3000/api/notes
 
 ### 5. Run tests
 
+Jest + Supertest for testing the code. Run the following command to run tests locally.
+
 ```bash
 npm test
 ```
