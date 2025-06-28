@@ -110,3 +110,7 @@ Ran all test suites.
 ```
 
 ![alt text](test_results.png)
+
+## Keploy API Testing Platform results
+
+![alt text](api_test_results.png)
