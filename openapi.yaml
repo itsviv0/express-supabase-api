@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: Notes API
+  description: A simple Notes API built with Express and Supabase (PostgreSQL)
+  version: 1.0.0
+
+servers:
+  - url: https://express-supabase-api.vivs.live/
+    description: Production server
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /api/notes:
+    get:
+      summary: Get all notes
+      responses:
+        "200":
+          description: List of all notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Note"
+
+    post:
+      summary: Create a new note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewNote"
+      responses:
+        "201":
+          description: Note created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Note"
+        "500":
+          description: Error creating note
+
+  /api/notes/{id}:
+    put:
+      summary: Update an existing note
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: UUID of the note to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewNote"
+      responses:
+        "200":
+          description: Note updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Note"
+        "500":
+          description: Error updating note
+
+    delete:
+      summary: Delete a note
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: UUID of the note to delete
+      responses:
+        "204":
+          description: Note deleted
+        "500":
+          description: Error deleting note
+
+components:
+  schemas:
+    Note:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    NewNote:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        title:
+          type: string
+        content:
+          type: string
